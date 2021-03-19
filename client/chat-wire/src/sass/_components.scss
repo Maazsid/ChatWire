@@ -1,0 +1,631 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $secondary-font;
+  color: $secondary-color-dark;
+}
+
+.container {
+  margin: 0.8rem 7rem 0rem 7rem;
+}
+
+.container-width {
+  width: 80%;
+}
+
+/* Header */
+
+.header {
+  @extend .container;
+  @include flexboxContainer(row, space-around, center);
+  &__logo-container {
+    flex-grow: 1;
+  }
+  &__logo-image {
+    width: 200px;
+    height: 50px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__links {
+    overflow: hidden;
+    & > &--active {
+      color: $secondary-color-dark;
+    }
+    & > a {
+      padding: 1rem;
+      text-decoration: none;
+      color: $secondary-color;
+      font-weight: 600;
+
+      &:hover {
+        color: $secondary-color-dark;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+// Menu icon css
+
+.menu-btn {
+  display: none;
+}
+
+.menu-icon {
+  cursor: pointer;
+  padding: 1.2rem 1rem;
+  position: relative;
+  outline: none;
+}
+
+.navicon {
+  background-color: $secondary-color-dark;
+  width: 18px;
+  height: 2px;
+  display: none;
+  position: relative;
+  transition: background-color 0.2s ease-out;
+}
+
+.navicon::after,
+.navicon::before {
+  content: '';
+  background-color: $secondary-color-dark;
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  transition: all 0.2s ease-out;
+}
+
+.navicon::after {
+  top: -5px;
+}
+.navicon::before {
+  top: 5px;
+}
+
+.menu-btn:checked ~ .header__links {
+  max-height: 240px;
+}
+
+.menu-btn:checked + .header__logo-container .menu-icon .navicon {
+  background: transparent;
+}
+
+.menu-btn:checked + .header__logo-container .menu-icon .navicon::before {
+  transform: rotate(-45deg);
+}
+
+.menu-btn:checked + .header__logo-container .menu-icon .navicon::after {
+  transform: rotate(45deg);
+}
+
+.menu-btn:checked + .header__logo-container .menu-icon .navicon::before,
+.menu-btn:checked + .header__logo-container .menu-icon .navicon::after {
+  top: 0;
+}
+
+/* Home Page */
+
+.home-section {
+  @extend .container;
+  margin-top: 2rem;
+  &__image-container {
+    @include flexboxContainer(row, flex-end, center);
+  }
+  &__image {
+    width: 100%;
+    height: 450px;
+  }
+}
+
+.hero-section {
+  &__title {
+    font-family: $primary-font;
+    text-align: center;
+    color: $primary-color-shade;
+  }
+}
+
+.hero-section-card {
+  @include flexboxContainer(row, center, center);
+  &__container {
+    @extend .container-width;
+    @include flexboxContainer(column, center, center);
+    border-top: 4px solid $primary-color;
+    background-color: $secondary-color-shade;
+    padding: 0rem 4rem 2rem 4rem;
+  }
+
+  &__title {
+    text-align: center;
+    color: $secondary-color-dark;
+    font-family: $primary-font;
+    text-transform: uppercase;
+  }
+
+  &__input {
+    @include input;
+    margin-top: 2rem;
+    &:focus {
+      border-color: $primary-color;
+      outline: none;
+    }
+  }
+  &__sign-in {
+    span {
+      color: $primary-color;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  }
+}
+
+.error-message {
+  color: $danger-color;
+  font-weight: 600;
+}
+
+.MuiCircularProgress-svg {
+  color: #fff;
+}
+
+/* Chat page */
+
+.chat-section {
+  margin-top: 2rem;
+  @extend .container;
+  border-radius: 8px;
+  height: 80vh;
+}
+
+.MuiButtonBase-root.MuiButton-root {
+  background-color: $primary-color-shade;
+  margin-top: 1rem;
+  width: 100%;
+  color: #fff;
+  &:hover {
+    background-color: $primary-color;
+  }
+}
+
+.MuiTabs-indicator {
+  border-bottom: 3px solid $primary-color;
+}
+
+.MuiPaper-root.MuiAppBar-root {
+  background-color: $secondary-color-shade;
+  color: $secondary-color-dark;
+  box-shadow: none;
+}
+
+.MuiButtonBase-root.MuiTab-root {
+  font-family: $secondary-font;
+  color: $secondary-color-dark;
+  font-weight: 600;
+}
+
+// Chat Panel
+
+.panel {
+  height: 100%;
+  background-color: $secondary-color-shade-light;
+  position: relative;
+  &__add-btn {
+    position: absolute;
+    bottom: 8%;
+    right: 8%;
+  }
+}
+
+.add-modal-button.MuiFab-root {
+  background-color: $primary-color-shade;
+  &:hover {
+    background-color: $primary-color;
+  }
+}
+
+.add-modal-icon.MuiSvgIcon-root {
+  color: #fff;
+}
+
+// community panel
+
+.comm-panel {
+  margin-top: 0.8rem;
+  height: 90%;
+  position: relative;
+
+  & .MuiPagination-root {
+    position: absolute;
+    bottom: 5%;
+    width: 100%;
+    @include flexboxContainer(row, center, stretch);
+  }
+
+  & .MuiPaper-root {
+    margin: 0.4rem;
+    display: flex;
+    align-items: center;
+  }
+  & .MuiInputBase-root {
+    width: 90%;
+  }
+  & .MuiInputBase-root .MuiInputBase-input {
+    padding: 0.4rem 0.8rem;
+  }
+
+  &__list {
+    height: 75%;
+    overflow: hidden;
+  }
+
+  &__list > .MuiListItem-root.Mui-selected {
+    border-left: 3px solid $primary-color-shade;
+    background-color: rgba(204, 204, 204, 0.3);
+  }
+  &__list > .MuiButtonBase-root.MuiListItem-root {
+    margin-bottom: 0.4rem;
+    &:hover {
+      background-color: rgba(204, 204, 204, 0.1);
+    }
+  }
+}
+
+// private chat panel
+
+.pv-panel {
+  margin-top: 0.8rem;
+  & .MuiPaper-root {
+    margin: 0.4rem;
+    display: flex;
+    align-items: center;
+  }
+  & .MuiInputBase-root {
+    width: 90%;
+  }
+  & .MuiInputBase-root .MuiInputBase-input {
+    padding: 0.4rem 0.8rem;
+  }
+  &__list > .MuiListItem-root span {
+    flex-grow: 1;
+  }
+  &__list > .MuiListItem-root.Mui-selected {
+    border-left: 3px solid $primary-color-shade;
+    background-color: rgba(204, 204, 204, 0.3);
+  }
+  &__list > .MuiButtonBase-root.MuiListItem-root {
+    margin-bottom: 0.4rem;
+    &:hover {
+      background-color: rgba(204, 204, 204, 0.1);
+    }
+  }
+}
+
+// community modal or dialog
+
+.community-dialog {
+  & .MuiDialog-paper {
+    min-width: 40%;
+    @include flexboxContainer(column, center, center);
+  }
+  & .MuiDialogContent-root {
+    width: 100%;
+  }
+  & .MuiDialogActions-root {
+    align-self: flex-end;
+  }
+  & .MuiDialogTitle-root {
+    text-transform: uppercase;
+  }
+  & .MuiFormControl-root {
+    width: 100%;
+  }
+  & .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: $primary-color-shade;
+  }
+  & .MuiFormLabel-root.MuiInputLabel-root.Mui-focused {
+    color: $primary-color-shade;
+  }
+  &__cancel-btn.MuiButtonBase-root {
+    background-color: $danger-color;
+    &:hover {
+      background-color: $danger-color-dark;
+    }
+  }
+  &__submit-btn.MuiButtonBase-root {
+    background-color: $success-color;
+    &:hover {
+      background-color: $success-color-dark;
+    }
+  }
+}
+
+// private chat modal
+
+.pv-dialog {
+  @extend .community-dialog;
+
+  & .MuiList-padding {
+    padding: 0;
+  }
+
+  & .MuiListItem-root {
+    margin-bottom: 0.4rem;
+  }
+
+  & .MuiList-root {
+    padding-top: 0.8rem;
+  }
+
+  &__cancel-btn.MuiButtonBase-root {
+    background-color: $danger-color;
+    &:hover {
+      background-color: $danger-color-dark;
+    }
+  }
+  &__submit-btn.MuiButtonBase-root {
+    background-color: $success-color;
+    &:hover {
+      background-color: $success-color-dark;
+    }
+  }
+}
+
+// chat window
+
+.chat-window {
+  border: 2px solid $tertiary-color;
+  height: 100%;
+  border-radius: 8px;
+  position: relative;
+  @include flexboxContainer(column, space-around);
+  & .MuiAppBar-root {
+    padding: 0.8rem;
+  }
+  &__name {
+    padding-left: 2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  &__messages-container {
+    flex-grow: 1;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 100%;
+    @include flexboxContainer(column, flex-start, flex-start);
+  }
+  &__messages-container::-webkit-scrollbar {
+    width: 7px;
+  }
+  &__messages-container::-webkit-scrollbar-thumb {
+    @include scrollbar-thumb;
+  }
+
+  &__send-message-area::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  &__send-message-area::-webkit-scrollbar-thumb {
+    @include scrollbar-thumb;
+  }
+
+  &__send-message-container {
+    width: 100%;
+    @include flexboxContainer(row, stretch, flex-end);
+    background-color: $secondary-color-shade;
+    padding: 0.8rem 0rem 0.8rem 0.4rem;
+  }
+
+  &__send-message-area {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    padding: 0.2rem 1rem 0rem 1rem;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    min-height: 40px;
+  }
+  &__send-icon {
+    width: 40px;
+    height: 40px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__emoji-container{
+    position: absolute;
+    bottom : 10%;
+    left : 0;
+  }
+  &__file-container{
+    position: relative;
+  }
+  &__ok{
+    display : none;
+  }
+  &__label{
+    position: absolute;
+    border-radius: 7px;
+    height: 200px;
+    background: $secondary-color;
+    bottom : 100%;
+    left : 0;
+    transition: height 2s ease-out;
+  }
+  &__ok:checked ~ &__label{
+    // height: 150px;
+  }
+  &__file-options{
+    // position: absolute;
+    // height : 100px;
+    // border-radius: 7px;
+    // padding: 5rem 1rem 0rem 1rem;
+    // padding : 0;
+    // background: $secondary-color;
+    // bottom : 100%;
+    // left : 0;
+    // transition: padding 2s;
+  }
+
+  &__smile-icon-container{
+    margin-right: 0.4rem;
+    margin-bottom: 0.2rem;
+  }
+  &__smile-icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 0.4rem;
+    margin-bottom: 0.2rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__message {
+    @include flexboxContainer(column, flex-start, flex-start);
+    color: #fff;
+    position: relative;
+    margin: 0.8rem 1rem 0.4rem 1rem;
+    padding: 0.2rem 1rem 0.2rem 0.6rem;
+    width: fit-content;
+    border-radius: 8px;
+    max-width: 80%;
+    min-width: 20%;
+    line-height: 1.5;
+  }
+  &__message-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: $tertiary-color;
+  }
+  &__message-time {
+    color: $tertiary-color;
+    font-size: 12px;
+    font-weight: 600;
+    align-self: flex-end;
+  }
+}
+
+/* error-page */
+
+.error-page {
+  width: 100%;
+  height: 100vh;
+  @include flexboxContainer(column, stretch, center);
+  &__title {
+    color: $primary-color-shade;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 600;
+  }
+}
+
+/* contact page */
+
+.contact-page {
+  @extend .container;
+  &__title {
+    color: $primary-color;
+    text-transform: uppercase;
+    font-family: $secondary-font;
+  }
+  &__text {
+    font-size: 1.2rem;
+  }
+}
+
+/* about page */
+
+.about-page {
+  @extend .container;
+  &__title {
+    color: $primary-color;
+    text-transform: uppercase;
+    font-family: $secondary-font;
+  }
+  &__text {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .home-section {
+    &__image-container {
+      display: none;
+    }
+  }
+
+  .header {
+    @include flexboxContainer(column, center, flex-start);
+    &__logo-container {
+      width: 100%;
+      @include flexboxContainer(row, center, center);
+    }
+    &__links {
+      max-height: 0;
+      transition: max-height 0.2s ease-out;
+      & > a {
+        display: block;
+      }
+    }
+  }
+
+  .hero-section-card__container {
+    padding: 0rem 0.8rem 2rem 0.8rem;
+  }
+
+  .space {
+    flex-grow: 1;
+  }
+
+  .navicon {
+    display: block;
+    float: right;
+  }
+
+  .container {
+    margin: 4px 4px 0px 4px;
+  }
+
+  .chat-section {
+    height: 90vh;
+  }
+
+  .chat-section,
+  .home-section {
+    margin-top: 2.4rem;
+  }
+  .container-width {
+    width: 100%;
+  }
+  .hero-section-right {
+    &__container {
+      padding: 0rem 1rem 1rem 1rem;
+    }
+  }
+  .community-dialog,
+  .pv-dialog {
+    & .MuiDialog-paper {
+      min-width: 90%;
+    }
+  }
+
+  .chat-window {
+    &__message {
+      min-width: 30%;
+    }
+  }
+
+  .comm-panel {
+    &__list {
+      height: 75%;
+    }
+  }
+}

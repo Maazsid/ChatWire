@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Open+Sans:wght@300&display=swap');
+
+$primary-font: 'Nunito', Arial, sans-serif;
+$secondary-font: 'Open Sans', Helvetica;
+
+$primary-color: #cc0059;
+$primary-color-shade: #e03870;
+
+$secondary-color: #bfbfbf;
+$secondary-color-shade: rgba(230, 230, 230, 0.7);
+$secondary-color-shade-light: rgba(230, 230, 230, 0.3);
+$secondary-color-dark:  #161616;
+
+$tertiary-color: rgb(220, 220, 220);
+$tertiary-color-dark: rgb(175, 175, 175);
+$tertiary-color-shade: rgb(155, 155, 155);
+
+$quad-color: #1d55d6;
+
+$success-color: #0a8736;
+$success-color-dark: #077438;
+$danger-color: #c12020;
+$danger-color-dark: #a51723;
+
+/* mixins */
+
+@mixin flexboxContainer($direction, $main-axis, $cross-axis: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $main-axis;
+  align-items: $cross-axis;
+}
+
+@mixin input {
+  width: 100%;
+  padding: 1.2rem;
+  height: 2rem;
+  border-radius: 4px;
+  font-family: $secondary-font;
+  font-size: 1rem;
+  border: 1px solid $secondary-color;
+}
+
+@mixin scrollbar-thumb {
+  background: $tertiary-color-dark;
+  border-radius: 1rem;
+  &:hover {
+    background-color: $tertiary-color-shade;
+    cursor: pointer;
+  }
+}
